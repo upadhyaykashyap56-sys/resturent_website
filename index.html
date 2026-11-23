@@ -1,0 +1,736 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saffron Table | Restaurant</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fffdf9;
+    color: #29251f;
+}
+
+:root {
+    --orange: #c87535;
+    --dark: #28221c;
+    --cream: #fff8ed;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Navbar */
+.navbar {
+    height: 80px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 15px #00000010;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.logo span, footer h2 span {
+    color: var(--orange);
+}
+
+nav {
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: var(--orange);
+}
+
+.nav-btn, .primary-btn {
+    display: inline-block;
+    background: var(--orange);
+    color: white;
+    padding: 14px 25px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.nav-btn:hover, .primary-btn:hover {
+    background: #a95b24;
+    transform: translateY(-3px);
+}
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+/* Hero */
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    padding: 80px 10%;
+    color: white;
+    background:
+    linear-gradient(90deg, #000000c9, #00000020),
+    url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1600') center/cover;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.subtitle {
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(45px, 7vw, 75px);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #e5a76d;
+}
+
+.hero-text {
+    max-width: 470px;
+    line-height: 1.8;
+    color: #eee;
+    margin-bottom: 30px;
+}
+
+/* Sections */
+.section {
+    padding: 100px 9%;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading h2, .about h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+/* About */
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.about-image img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.about-content p:not(.subtitle) {
+    color: #777;
+    line-height: 1.9;
+    margin: 20px 0 30px;
+}
+
+.text-btn {
+    color: var(--orange);
+    font-weight: bold;
+}
+
+/* Menu */
+.menu-section {
+    background: var(--cream);
+}
+
+.filters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.filter-btn {
+    padding: 10px 22px;
+    background: white;
+    border: 1px solid #e4d8c9;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.filter-btn.active, .filter-btn:hover {
+    background: var(--orange);
+    color: white;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.food-card {
+    background: white;
+    border-radius: 9px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px #00000010;
+    transition: .3s;
+}
+
+.food-card:hover {
+    transform: translateY(-7px);
+}
+
+.food-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.food-info {
+    padding: 22px;
+}
+
+.food-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 9px;
+}
+
+.food-info p {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.food-info span {
+    color: var(--orange);
+    font-size: 19px;
+    font-weight: bold;
+}
+
+.food-card.hide {
+    display: none;
+}
+
+/* Special Banner */
+.special-banner {
+    min-height: 400px;
+    padding: 80px 10%;
+    display: flex;
+    align-items: center;
+    color: white;
+    background:
+    linear-gradient(90deg, #000000cc, #00000030),
+    url('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1600') center/cover;
+}
+
+.special-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    margin-bottom: 30px;
+}
+
+/* Reviews */
+.review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.review-card {
+    padding: 30px;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px #00000008;
+}
+
+.stars {
+    color: #e6a333;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.review-card p {
+    color: #777;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Reservation */
+.reservation {
+    background: var(--cream);
+}
+
+.reservation form {
+    max-width: 700px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.reservation input, .reservation select {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ddd0c0;
+    background: white;
+    border-radius: 5px;
+    outline: none;
+}
+
+.reservation input:focus, .reservation select:focus {
+    border-color: var(--orange);
+}
+
+.reservation button {
+    grid-column: 1 / -1;
+}
+
+#formMessage {
+    text-align: center;
+    margin-top: 20px;
+    color: #37834b;
+    font-weight: 600;
+}
+
+/* Footer */
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 55px 20px 25px;
+}
+
+footer h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.copyright {
+    border-top: 1px solid #51483e;
+    padding-top: 22px;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* Responsive */
+@media(max-width: 900px) {
+    .navbar {
+        padding: 0 5%;
+    }
+
+    .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 650px) {
+    .navbar {
+        height: 70px;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 25px;
+    }
+
+    nav.show {
+        display: flex;
+    }
+
+    .nav-btn {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .hero {
+        min-height: 550px;
+        padding: 60px 7%;
+    }
+
+    .section {
+        padding: 70px 6%;
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .about-image img {
+        height: 300px;
+    }
+
+    .menu-grid, .review-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation form {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation button {
+        grid-column: auto;
+    }
+
+    .special-banner h2 {
+        font-size: 36px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <a href="#home" class="logo">Saffron<span>.</span></a>
+
+    <nav id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <a href="#reservation" class="nav-btn">Book a Table</a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <p class="subtitle">WELCOME TO SAFFRON TABLE</p>
+        <h1>Good Food.<br><span>Great Moments.</span></h1>
+        <p class="hero-text">
+            Experience delicious food, wonderful flavours
+            and unforgettable moments with us.
+        </p>
+        <a href="#menu" class="primary-btn">Explore Menu →</a>
+    </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about section" id="about">
+    <div class="about-image">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900" alt="Restaurant dining">
+    </div>
+
+    <div class="about-content">
+        <p class="subtitle">OUR STORY</p>
+        <h2>Food Made With<br>Love & Passion</h2>
+        <p>
+            At Saffron Table, we believe great food brings
+            people together. Our chefs combine fresh ingredients,
+            creativity and passion to create memorable dining experiences.
+        </p>
+        <a href="#menu" class="text-btn">Discover Our Menu →</a>
+    </div>
+</section>
+
+<!-- MENU -->
+<section class="menu-section section" id="menu">
+    <div class="section-heading">
+        <p class="subtitle">OUR SPECIALITIES</p>
+        <h2>Explore Our Menu</h2>
+        <p>Fresh ingredients. Amazing flavours. Made just for you.</p>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="starter">Starters</button>
+        <button class="filter-btn" data-category="main">Main Course</button>
+        <button class="filter-btn" data-category="dessert">Desserts</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+
+        <div class="food-card" data-category="starter">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600" alt="Pizza">
+            <div class="food-info">
+                <h3>Classic Pizza</h3>
+                <p>Fresh cheese, tomato and herbs.</p>
+                <span>₹249</span>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="main">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600" alt="Salad">
+            <div class="food-info">
+                <h3>Garden Salad</h3>
+                <p>Fresh vegetables and special dressing.</p>
+                <span>₹199</span>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="main">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600" alt="Grilled platter">
+            <div class="food-info">
+                <h3>Grilled Platter</h3>
+                <p>Delicious grilled specialities.</p>
+                <span>₹349</span>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="starter">
+            <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600" alt="Samosa">
+            <div class="food-info">
+                <h3>Crispy Samosa</h3>
+                <p>Crispy pastry with spiced filling.</p>
+                <span>₹99</span>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="dessert">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600" alt="Ice cream">
+            <div class="food-info">
+                <h3>Ice Cream</h3>
+                <p>Rich and creamy classic dessert.</p>
+                <span>₹149</span>
+            </div>
+        </div>
+
+        <div class="food-card" data-category="dessert">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600" alt="Chocolate cake">
+            <div class="food-info">
+                <h3>Chocolate Cake</h3>
+                <p>Soft chocolate cake with cream.</p>
+                <span>₹179</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SPECIAL BANNER -->
+<section class="special-banner">
+    <div>
+        <p class="subtitle">A LITTLE SOMETHING SPECIAL</p>
+        <h2>Every Meal Tells<br>A Delicious Story.</h2>
+        <a href="#reservation" class="primary-btn">Reserve Your Table</a>
+    </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews section" id="reviews">
+    <div class="section-heading">
+        <p class="subtitle">TESTIMONIALS</p>
+        <h2>What Our Guests Say</h2>
+    </div>
+
+    <div class="review-grid">
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Amazing food and a beautiful atmosphere. Definitely worth visiting!"</p>
+            <h4>Rahul Sharma</h4>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"Wonderful service and delicious food. Had a great experience."</p>
+            <h4>Priya Patel</h4>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p>"A lovely place to enjoy good food with friends and family."</p>
+            <h4>Arjun Mehta</h4>
+        </div>
+    </div>
+</section>
+
+<!-- RESERVATION -->
+<section class="reservation section" id="reservation">
+    <div class="section-heading">
+        <p class="subtitle">BOOK YOUR EXPERIENCE</p>
+        <h2>Reserve Your Table</h2>
+        <p>We look forward to welcoming you!</p>
+    </div>
+
+    <form id="bookingForm">
+        <input type="text" id="name" placeholder="Your Name" required>
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="tel" id="phone" placeholder="Phone Number" required>
+        <input type="date" id="date" required>
+
+        <select id="guests" required>
+            <option value="">Number of Guests</option>
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5+">5+ Guests</option>
+        </select>
+
+        <button type="submit" class="primary-btn">Book Now</button>
+    </form>
+
+    <p id="formMessage" role="status"></p>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact">
+    <h2>Saffron<span>.</span></h2>
+    <p>Good Food. Great Moments.</p>
+
+    <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#menu">Menu</a>
+        <a href="#reservation">Reservation</a>
+    </div>
+
+    <p class="copyright">
+        © 2026 Saffron Table. All Rights Reserved.
+    </p>
+</footer>
+
+<script>
+// Mobile Navigation
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+menuToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
+    menuToggle.textContent =
+        navLinks.classList.contains("show") ? "✕" : "☰";
+});
+
+// Close menu after clicking a link
+document.querySelectorAll("#navLinks a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("show");
+        menuToggle.textContent = "☰";
+    });
+});
+
+// Menu Category Filter
+const filterButtons = document.querySelectorAll(".filter-btn");
+const foodCards = document.querySelectorAll(".food-card");
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+
+        filterButtons.forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        const category = button.dataset.category;
+
+        foodCards.forEach(card => {
+            if (
+                category === "all" ||
+                card.dataset.category === category
+            ) {
+                card.classList.remove("hide");
+            } else {
+                card.classList.add("hide");
+            }
+        });
+    });
+});
+
+// Reservation Form
+const bookingForm = document.getElementById("bookingForm");
+const formMessage = document.getElementById("formMessage");
+const dateInput = document.getElementById("date");
+
+// Set minimum date to today
+const today = new Date();
+const localToday = new Date(
+    today.getTime() - today.getTimezoneOffset() * 60000
+).toISOString().split("T")[0];
+
+dateInput.min = localToday;
+
+bookingForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+
+    if (!name) {
+        formMessage.textContent = "Please enter your name.";
+        return;
+    }
+
+    formMessage.textContent =
+        `Thank you, ${name}! Your reservation request has been received.`;
+
+    bookingForm.reset();
+    dateInput.min = localToday;
+});
+</script>
+
+</body>
+</html>
